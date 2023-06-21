@@ -1,29 +1,38 @@
 class Solution {
     public boolean isValid(String s) {
-        // Create hashmap to store the pairs...
-        HashMap<Character, Character> Hmap = new HashMap<Character, Character>();
-        Hmap.put(')','(');
-        Hmap.put('}','{');
-        Hmap.put(']','[');
-        // Create stack data structure...
+        
+        HashMap<Character,Character> hm = new HashMap<Character,Character>();
+       
+        // Here just store the brackets pairs
+        hm.put(')','(');
+        hm.put('}','{');
+        hm.put(']','[');
+        
+        
+        // Create a stack
         Stack<Character> stack = new Stack<Character>();
-        // Traverse each charater in input string...
-        for (int idx = 0; idx < s.length(); idx++){
-            // If open parentheses are present, push it to stack...
-            if (s.charAt(idx) == '(' || s.charAt(idx) == '{' || s.charAt(idx) == '[') {
-                stack.push(s.charAt(idx));
+        
+        // Traverse string of inouts
+        for( int i=0; i<s.length(); i++){
+            
+            // if open brackets , put it in stack
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
+                stack.push(s.charAt(i));
                 continue;
             }
-            // If the character is closing parentheses, check that the same type opening parentheses is being pushed to the stack or not...
-            // If not, we need to return false...
-            if (stack.size() == 0 || Hmap.get(s.charAt(idx)) != stack.pop()) {
+            
+            if(stack.size() ==0 || hm.get(s.charAt(i)) != stack.pop()){
                 return false;
             }
+        
         }
-        // If the stack is empty, return true...
-        if (stack.size() == 0) {
+        
+        //if stack empty return true
+        if(stack.size() == 0){
             return true;
         }
+        
         return false;
+        
     }
 }
