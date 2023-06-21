@@ -1,13 +1,22 @@
 class Solution {
     public int lengthOfLastWord(String s) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != ' ') {
-                count++;
-            } else if (i < s.length() - 1 && s.charAt(i + 1) != ' ') {
-                count = 0;
+        int len =0;
+        
+        for (int i = s.length() - 1; i >= 0; i--) {
+            
+            if(s.charAt(i) != ' '){
+                len++;
+            }else{
+                
+                // this will run only if length become more than 0 which means first if condition 
+                // ran already
+                if(len>0){
+                    return len;
+                }
             }
+            
+            
         }
-        return count;
+        return len;
     }
 }
