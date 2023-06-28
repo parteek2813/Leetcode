@@ -14,7 +14,9 @@ class Solution {
         public static void backtrack(List<String> res, StringBuilder sb, String digits, String[] lettersMap, int idx) {
         if (idx == digits.length()) {
             res.add(sb.toString());
+            
             return;
+            
         }
 
         int number = digits.charAt(idx) - '0';
