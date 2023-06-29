@@ -15,7 +15,7 @@ class Solution {
                 else{
                     s += Integer.toString(count);
                     s += st.charAt(j);
-                    count = 1;
+                    count = 1  ; 
                 }
             }
             s += Integer.toString(count);
