@@ -15,7 +15,7 @@ private boolean isParticallyValid(char[][] board, int x1, int y1,int x2,int y2){
     Set singleSet = new HashSet();
     for (int i= x1; i<=x2; i++){
         for (int j=y1;j<=y2; j++){
-            if (board[i][j]!='.') if(!singleSet.add(board[i][j])) return false;
+            if (board[i][j]!='.') if(!singleSet.add(board[i][j])) return  false;
         }
     }
     return true;
