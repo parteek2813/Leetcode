@@ -65,7 +65,7 @@ class Solution {
 		return res;
 	}
 
-	public int checkFound(List<Integer> res, int start, int wordsLen, int j, int k,
+	public int checkFound(List<Integer> res, int start, int    wordsLen, int j, int k,
 			HashMap<String, Integer> curDict, String s) {
 		if (start + wordsLen == j + k) {
 			res.add(start);
