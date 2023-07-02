@@ -11,7 +11,7 @@ class Solution {
 			}
 		}
 
-		for (int i = ans.length - 1; i > 0; i--) {
+		for (int i = ans.length - 1; i > 0   ; i--) {
 			ans[i - 1] += ans[i] / 10;
 			ans[i] %= 10;
 		}
