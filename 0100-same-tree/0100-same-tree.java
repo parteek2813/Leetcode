@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTree(TreeNode p, TreeNode  q) {
 	     Stack<TreeNode> stack_p = new Stack <> ();       
 	     Stack<TreeNode> stack_q = new Stack <> ();
 	     if (p != null) stack_p.push( p ) ;
