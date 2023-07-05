@@ -27,6 +27,9 @@ class Solution {
         int length = getLength(head);
         int targetIndex = length - n;
 
+        // here introducing a new dummy node, so there is no need of down targetINdex -1 again , 
+        // as it is handled automatically, as we have added one more node here
+        
         ListNode temp = dummy;
         for (int i = 0; i < targetIndex; i++) {
             temp = temp.next;
