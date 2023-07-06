@@ -13,7 +13,7 @@ class Solution {
             
             while(sum>= target){
                 min = Math.min(min, j-i);
-                sum = sum - nums[i++]; // it means we found the array now move to i++;
+                sum = sum - nums[i++] ;  // it means we found the array now move to i++;
                 
             }
         }
