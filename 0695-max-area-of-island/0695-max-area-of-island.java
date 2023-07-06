@@ -10,7 +10,7 @@ class Solution {
     }
     
     int dfs(int[][] grid, int row, int column) {
-        if(row < 0 || row >= grid.length || column < 0 || column >= grid[0].length || grid[row][column] == 0) return 0;
+        if(row < 0 || row >= grid.length ||   column < 0 || column >= grid[0].length || grid[row][column] == 0) return 0;
         
         grid[row][column] = 0;
         
