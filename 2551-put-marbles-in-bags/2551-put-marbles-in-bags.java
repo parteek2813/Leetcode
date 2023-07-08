@@ -40,7 +40,7 @@ class Solution {
         
         Arrays.sort(costs);
         
-        long min = 0, max = 0;
+        long min = 0 , max = 0;
         for (int i = 0; i < k - 1; i++) {
             min += costs[i];
             max += costs[n-i-2];    
