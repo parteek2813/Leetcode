@@ -21,7 +21,7 @@ public class Solution {
         return slow;
     }
 
-    public ListNode detectCycle(ListNode head) {
+    public ListNode detectCycle(ListNode head ) {
        ListNode slow = head;
         ListNode fast = head;
         while(fast  != null && fast.next != null){
