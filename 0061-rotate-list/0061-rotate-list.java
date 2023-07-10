@@ -17,22 +17,18 @@ class Solution {
             x = x.next;
             n++;
         }
-        k = k% n; // updating k acc. to point 5
-        while(k-- > 0){
-            ListNode y = head;
-            int preValue = y.val;
-
-            y = y.next; // starting from 2nd node
-            while( y != null ){
-                // swapping x.val with preValue
-                int temp = y.val;  
-                y.val = preValue;
-                preValue = temp;
-
-                y= y.next;
-            }
-            head.val = preValue; //updating 1st node value to last
+        int i = 1;
+        k = k%n;  // updaing k acc. to point 5
+        if(k==0 || n==1) return head; // list will not change in this case, so just return it
+        ListNode y = head;
+        while( i < n-k ){
+            y = y.next;
+            i++;
         }
-        return head;
+        ListNode newHead = y.next; // Creating a new head point which points to (n-k)th node
+        y.next = null;   // pointing the (n- k-1)th node to null
+        x.next = head; // pointing the last pointer to first node.
+        
+        return newHead;
     }
 }
