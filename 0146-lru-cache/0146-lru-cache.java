@@ -58,7 +58,7 @@ public void put(int key, int value) {
 		addToHead(node);
 	} else {
 		Node node = new Node(key, value);
-		map.put(key, node);
+		map.put(key,  node);
 		if (count < capicity) {
 			count++;
 			addToHead(node);
