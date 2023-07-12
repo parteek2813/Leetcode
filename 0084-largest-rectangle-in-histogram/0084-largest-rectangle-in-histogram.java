@@ -11,7 +11,7 @@ class Solution {
         
         for(int i = 1; i < n; i++){
             int prev = i - 1; // previous for comparing the heights
-            while(prev >= 0 && heights[prev] >= heights[i]){
+            while(prev >= 0 && heights[prev] >= heights[i] ){
                 prev = left[prev]; // we have done this to minimise the jumps we make to the left
             }
             left[i] = prev;
