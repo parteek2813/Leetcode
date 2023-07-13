@@ -18,7 +18,7 @@ public int maximalRectangle(char[][] matrix) {
 private void resetHeight(char[][] matrix, int[] height, int idx){
     for(int i = 0; i < matrix[0].length; i ++){
         if(matrix[idx][i] == '1') height[i] += 1;
-        else height[i] = 0;
+        else height[i] =  0;
     }
 }    
 
