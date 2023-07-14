@@ -12,7 +12,7 @@ class Solution {
     
     // declaring reverse function here
 
-    static ListNode reverse(ListNode start, ListNode end){
+    static ListNode reverse(ListNode start, ListNode end ){
         ListNode prev = null;
         ListNode next = start;
         
