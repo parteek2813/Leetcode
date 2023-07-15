@@ -41,7 +41,7 @@ class Solution {
                 }
                 
                 if (currentNode.right != null) {
-                    queue.offer(currentNode.right);
+                    queue.offer(currentNode.right );
                 }
             }
             
