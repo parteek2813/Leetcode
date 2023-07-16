@@ -24,7 +24,8 @@ class Solution {
             return 0;
         }
         
-        sum = (sum<<1) + root.val;
+        // sum = (sum<<1) + root.val; 
+        sum = 2 * sum + root.val;
         
         if(root.left == null && root.right == null){
             return sum;
