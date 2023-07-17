@@ -48,7 +48,7 @@ class Solution {
                 head1 = head1.next;
             }
             if (head2 != null) {
-                sum += head2.val;
+                sum +=   head2.val;
                 head2 = head2.next;
             }
             int v = sum % 10;
