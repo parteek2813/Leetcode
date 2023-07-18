@@ -39,6 +39,11 @@
 
 
 // USING STACK:
+
+// Pretty hard to understand at first glance .... but the whole point is we are checking the currectval shoudl not be prev. val and jab tk left me jate rahoge , tk tk push krte raho and jab left null ho jayega to prev root ka root = current bn jayega and then left wala hmara prev value
+
+
+
 import java.util.Stack;
 
 class Solution {
