@@ -70,23 +70,25 @@ class Solution {
         
         
         // For first root,. just store in stack!
-        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> sc = new Stack<>();
         if (root.val > val) {
-            stack.push(root.left);
+            sc.push(root.left);
         } else {
-            stack.push(root.right);
+            sc.push(root.right);
         }
         
-       while (!stack.isEmpty()) {
-            TreeNode currentNode = stack.pop();
-            if (currentNode != null) {
-                if (currentNode.val == val) {
-                    return currentNode;
+        
+        while(!sc.isEmpty()){
+            TreeNode currNode = sc.pop();
+            if(currNode != null){
+                if(currNode.val == val){
+                    return currNode; // if popped node == val, then return this Node
                 }
-                if (currentNode.val > val) {
-                    stack.push(currentNode.left);
-                } else {
-                    stack.push(currentNode.right);
+                // Add curr Node and then pop and then see if it equals val iteratively
+                if(currNode.val> val){
+                    sc.push(currNode.left);
+                }else{
+                    sc.push(currNode.right);
                 }
             }
         }
