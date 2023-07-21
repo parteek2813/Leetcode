@@ -1,45 +1,82 @@
 class Solution {
-    public int findNumberOfLIS(int[] nums) {
-        int maxLen = 1;
-        //Step 1
-        int [] dp = new int[nums.length];
-        int [] count = new int[nums.length];
+    public int findNumberOfLIS(int[] a) {
+        int n = a.length, max = 1;
+        // need to maintain list of decks for each length
+        // in the list we need list of ending values (bottom up descending), and its counts prefix sum (bottom up)
+        List<List<int[]>> decks = new ArrayList<>(); // int[0]: tail value, int[1]: count's prefix sum
 
-        //Step 2
-        Arrays.fill(dp,1);
-        Arrays.fill(count,1);
+        // step1 push
+        for (int i = 0; i < n; i++) {
+            int idx4insert = bs(a[i], decks); // key logic of 300, find where I(a[i]) belongs
 
-        //Step 3
-        for(int k = 1; k < nums.length; k++)
-        {
-            for(int j = 0; j < k; j++)
-            {
-                if(nums[k] > nums[j])
-                {
-                    //Step 4
-                    if(dp[k] < dp[j] + 1)
-                    {
-                        dp[k] = dp[j] + 1;
-                        count[k] = count[j];
-                    }
+            // find cnt from previous list
+            int cnt = idx4insert == 0 ? 1 : getCount(decks.get(idx4insert-1), a[i]);
 
-                    //Step 5
-                    else if(dp[k] == dp[j] + 1)
-                    {
-                        count[k] += count[j];
-                    }
-                }
+            // create the new element
+            int[] cur = new int[] {a[i], cnt};
+            List<int[]> deck;
+            if (idx4insert == decks.size()) {
+                decks.add(deck = new ArrayList<>());
+            } else {
+                deck = decks.get(idx4insert); // find the right deck
+                cur[1] += deck.get(deck.size() - 1)[1]; // [1] is prefix sum of count
             }
-            //Step 6
-            maxLen = Math.max(maxLen,dp[k]);
+            deck.add(cur);
         }
 
-        //Step 7
-        int result = 0;
-        for(int k = 0; k < nums.length;k++)
-        {
-            if(maxLen == dp[k]) result += count[k];
+        // System.out.printf("Input Array:\n%s\nDecks:\n%s\n", Arrays.toString(a), toString(decks));
+
+        var deck = decks.get(decks.size() - 1);
+        return deck.get(deck.size() - 1)[1];
+    }
+
+    private int getCount(List<int[]> deck, int x) { // in a descending order list find largest smaller (no equal) 5 4 4 3: 4        
+        int l = 0, r = deck.size();
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (deck.get(m)[0] >= x) l = m + 1;
+            else r = m;
         }
-        return result;
+        if (l == deck.size()) return 1; // first # of LIS, so count is 1;
+        return deck.get(deck.size() - 1)[1] - (l == 0 ? 0 : deck.get(l-1)[1]);
+    }
+
+    private int bs(int x, List<List<int[]>> decks) { // smallest >=, i.e. insertion index, 1 3 4 4 5: 4
+        int l = 0, r = decks.size();
+        while (l < r) { // find smallest larger
+            int m = l + (r - l) / 2;
+            var deck = decks.get(m);
+            int cur = deck.get(deck.size() - 1)[0];
+            if (cur < x) l = m + 1;
+            else r = m;
+        }
+        return l;
+    }
+
+    private StringBuilder toString(List<List<int[]>> decks) {
+        return toString(decks, 1);
+    }
+    private StringBuilder toString(List<List<int[]>> decks, int w) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+        for (var deck : decks)
+            sb.append(decktosb(deck, w));
+
+        sb.append("]\n");
+        return sb;
+    }
+
+    private StringBuilder decktosb(List<int[]> deck) {
+        return decktosb(deck, 1);
+    }
+
+    private StringBuilder decktosb(List<int[]> deck, int w) {
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (var arr : deck)
+            sb.append(String.format("[%"+ w + "d, %"+ w + "d], ", arr[0], arr[1]));
+
+        sb.setLength(sb.length() - 2);
+        return sb.append("]\n");
     }
 }
