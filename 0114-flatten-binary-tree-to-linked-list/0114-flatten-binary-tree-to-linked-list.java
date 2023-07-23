@@ -14,6 +14,8 @@
  * }
  */
 
+// Reminder:  MUST DRY RUN TO UNDERSTAND BETTER and use debugger 
+
 class Pair {
     TreeNode head;
     TreeNode tail;
@@ -40,7 +42,7 @@ class Solution {
             root.right = root.left;
             root.left = null;
             
-        }
+        } 
         
         if(rightLL != null){
             return new Pair(root, rightLL.tail);
