@@ -1,65 +1,50 @@
-class Node{
-    char data;
-    boolean isTerminal;
-    HashMap<Character,Node> hm;
-    
-    // constructor
-    Node(char d){
-        this.data = d;
-        this.isTerminal = false;
-        this.hm = new HashMap<>();
+class TrieNode {
+    public char val;
+    public boolean isWord; 
+    public TrieNode[] children = new TrieNode[26];
+    public TrieNode() {}
+    TrieNode(char c){
+        TrieNode node = new TrieNode();
+        node.val = c;
     }
 }
 
-class Trie {
-    Node root;
-
+public class Trie {
+    private TrieNode root;
     public Trie() {
-        root = new Node('0');
+        root = new TrieNode();
+        root.val = ' ';
     }
-    
+
     public void insert(String word) {
-        Node temp = root;
-        for(char s : word.toCharArray()){
-            if(!temp.hm.containsKey(s)){
-                Node n = new Node(s);
-                temp.hm.put(s, n); // char and address store in hashmap
+        TrieNode ws = root;
+        for(int i = 0; i < word.length(); i++){
+            char c = word.charAt(i);
+            if(ws.children[c - 'a'] == null){
+                ws.children[c - 'a'] = new TrieNode(c);
             }
-            temp = temp.hm.get(s);
-            
+            ws = ws.children[c - 'a'];
         }
-        temp.isTerminal = true; // finishd all chars in word and reached at last node
+        ws.isWord = true;
     }
-    
+
     public boolean search(String word) {
-        Node temp = root;
-        for(char ch: word.toCharArray()){
-            if(temp.hm.containsKey(ch)){
-                temp = temp.hm.get(ch); // move on to next node by taking address from hm
-                continue;
-            }
-            return false;
+        TrieNode ws = root; 
+        for(int i = 0; i < word.length(); i++){
+            char c = word.charAt(i);
+            if(ws.children[c - 'a'] == null) return false;
+            ws = ws.children[c - 'a'];
         }
-        return temp.isTerminal;
+        return ws.isWord;
     }
-    
+
     public boolean startsWith(String prefix) {
-        Node temp = root;
-        for(char ch: prefix.toCharArray()){
-            if(!temp.hm.containsKey(ch)){
-                return false;
-            }
-            temp = temp.hm.get(ch);
+        TrieNode ws = root; 
+        for(int i = 0; i < prefix.length(); i++){
+            char c = prefix.charAt(i);
+            if(ws.children[c - 'a'] == null) return false;
+            ws = ws.children[c - 'a'];
         }
         return true;
-        
     }
 }
-
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie obj = new Trie();
- * obj.insert(word);
- * boolean param_2 = obj.search(word);
- * boolean param_3 = obj.startsWith(prefix);
- */
