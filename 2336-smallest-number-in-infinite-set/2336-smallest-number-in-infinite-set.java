@@ -1,30 +1,69 @@
-class SmallestInfiniteSet {
+// class SmallestInfiniteSet {
 
-      int cur;
-      Set<Integer> s;
+//      int cur;
+//      Set<Integer> s;
         
     
-    public SmallestInfiniteSet() {
+//     public SmallestInfiniteSet() {
       
-            cur = 1;
-            s = new HashSet<>();
+//             cur = 1;
+//             s = new HashSet<>();
+//     }
+    
+//     public int popSmallest() {
+//         if(!s.isEmpty()){
+//             int res = Collections.min(s); // get the minimum from the hashset s 
+//             s.remove(res);
+//             return res; 
+//         }else{
+//             cur++;
+//             return cur-1;
+//         }
+//     }
+    
+//     public void addBack(int num) {
+//         if(cur > num){
+//             s.add(num);
+//         }
+//     }
+// }
+
+
+class SmallestInfiniteSet {
+
+    
+    private PriorityQueue<Integer> q;
+    private int index;
+    
+    
+    public SmallestInfiniteSet() {
+        q = new PriorityQueue<Integer>();
+        index = 1;
     }
     
+    
     public int popSmallest() {
-        if(!s.isEmpty()){
-            int res = Collections.min(s); // get the minimum from the hashset s 
-            s.remove(res);
-            return res; 
-        }else{
-            cur++;
-            return cur-1;
+        if(q.size() > 0){
+            return q.poll();
         }
+        return index++;
+        
+    }
+    
+    private boolean is_in_q(int num){
+        for(int i : q){
+            if(i==num){
+                return true;
+            }
+           
+        }
+         return false;
     }
     
     public void addBack(int num) {
-        if(cur > num){
-            s.add(num);
-        }
+       if(num < index && !is_in_q(num)){
+           q.add(num);
+       }
     }
 }
 
