@@ -9,8 +9,8 @@ class Solution {
                 continue;
             }
 
-            int numElements;
-            if (nums[i] % currentLargest != 0) {
+            int numElements ;
+            if (nums[i] % currentLargest !=  0) {
                 numElements = nums[i] / currentLargest + 1;
                 currentLargest = nums[i] / numElements;
             } else {
