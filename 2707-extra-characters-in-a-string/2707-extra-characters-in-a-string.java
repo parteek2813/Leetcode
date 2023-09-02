@@ -18,10 +18,11 @@ class Solution {
 
             for (String w : dictionary) {
                 if (i + w.length() <= s.length() && s.substring(i, i + w.length()).equals(w)) {
-                    dp[i] = Math.min(dp[i], minExtraCharHelper(s, dictionary, i + w.length())); // Update if a word in the dictionary is found
+                    dp[i] = Math.min(dp[i], minExtraCharHelper(s, dictionary, i + w.length())); // Update if a word in 
                 }
             }
         }
+        
 
         return dp[i]; // Return the minimum extra characters starting from position i
     }
