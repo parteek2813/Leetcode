@@ -1,20 +1,16 @@
 class Solution {
-    public int minimumOperations(String num) {
-            int ans = num.length();
-            int n = num.length();
-        
-        for(int i=n-1; i>=0; i--){
-            for(int j = i-1; j>= 0; j--){
-                int lastNum = (num.charAt(i) - '0') + (num.charAt(j) - '0')*10;
-                if(lastNum % 25 == 0) {
-                    ans = Math.min(ans, n-j-2);
-                }
-                
-            }
-            if(num.charAt(i) == '0'){
-                ans = Math.min(ans, n-1);
-            }
+    public int minimumOperations(String num){
+        boolean zerofound = false;
+        boolean fivefound = false;
+        for (int i =num.length()-1; i >=0;i--){ 
+            if (zerofound && num.charAt(i)=='0') return num.length()-2-i;
+            if (zerofound && num.charAt(i)=='5') return num.length()-2-i;
+            if (fivefound && num.charAt(i)=='2') return num.length()-2-i;
+            if (fivefound && num.charAt(i)=='7') return num.length()-2-i;
+            if (num.charAt(i)=='5') fivefound = true;
+            if (num.charAt(i)=='0') zerofound = true;   
         }
-        return ans;
+        if (zerofound) return num.length()-1;
+        return num.length();
     }
 }
