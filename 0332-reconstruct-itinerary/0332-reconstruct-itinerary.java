@@ -9,7 +9,7 @@ class Solution {
         }
         
         
-        Stack<String> s = new Stack<>();
+        Stack<String>  s = new Stack<>();
         s.push("JFK"); // Starting point is JFK
         
         List<String> finalIternary = new ArrayList<>();
