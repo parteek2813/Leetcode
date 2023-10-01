@@ -45,7 +45,9 @@ class Solution {
         
         // The main logic here is that jab tak preorder[i] less hein value se 
         // tab tak i ko increment karate raho isse.... sare less element left taraf aajayenge simple
-        
+        // The approach here is similar hein binary search se...... but in binary search me hum mostly middle element
+        // find karte hein but yaha starting element ko mid ki tarah treat karo aur then usse less wala jitne bhi hein
+        // unhe ek taraf le jake recuresive code chala do.!
         
         int i;
         for (i=start+1; i<=end; i++) {
