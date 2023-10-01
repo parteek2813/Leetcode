@@ -14,12 +14,8 @@
  * }
  */
 class Solution {
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        TreeNode root = construct(nums, 0, nums.length -1);
-        return root;
-    }
     
-    private static TreeNode construct(int[] nums, int s, int e){
+     private static TreeNode construct(int[] nums, int s, int e){
         if(s>e) return null;
         if(s==e) return new TreeNode(nums[s]);
         
@@ -30,7 +26,23 @@ class Solution {
         root.right = construct(nums, idx+1, e);
         
         
-        return root;
+            return root;
+    }
+    
+    public TreeNode ConstructMaxBinaryTreeStack(int[] nums){
+        Stack<TreeNode> stack = new Stack<>();
+        
+        for (int num : nums) {
+            TreeNode currentNode = new TreeNode(num);
+            while (!stack.isEmpty() && num > stack.peek().val) {
+                currentNode.left = stack.pop();
+            }
+            if (!stack.isEmpty()) {
+                stack.peek().right = currentNode;
+            }
+            stack.push(currentNode);
+        }
+        return stack.isEmpty() ? null : stack.firstElement();
     }
     
     private static int findMax(int[] arr, int s , int e){
@@ -44,5 +56,13 @@ class Solution {
         }
         
         return idx;
+    }
+    
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        // TreeNode root = construct(nums, 0, nums.length -1);
+        // return root;
+        
+        
+        return ConstructMaxBinaryTreeStack(nums);
     }
 }
