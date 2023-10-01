@@ -42,6 +42,11 @@ class Solution {
         int value = preorder[start];
         TreeNode root = new TreeNode(value);
 
+        
+        // The main logic here is that jab tak preorder[i] less hein value se 
+        // tab tak i ko increment karate raho isse.... sare less element left taraf aajayenge simple
+        
+        
         int i;
         for (i=start+1; i<=end; i++) {
           if (preorder[i] > value) {
