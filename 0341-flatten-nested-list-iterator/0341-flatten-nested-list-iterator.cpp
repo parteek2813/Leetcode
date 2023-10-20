@@ -16,6 +16,23 @@
  * };
  */
 
+
+/**
+ * Your NestedIterator object will be instantiated and called as such:
+ * NestedIterator i(nestedList);
+ * while (i.hasNext()) cout << i.next();
+ */
+
+
+// APPROACH 1. Using Stack - 
+/*
+1. Stack me push karo sb 
+2. agr empty, return false... otherwise stack se nikalo aur then reverse me daaldo till Integer na ho.
+3. 
+
+*/
+
+
 class NestedIterator {
 public:
     
@@ -64,9 +81,3 @@ public:
         
     }
 };
-
-/**
- * Your NestedIterator object will be instantiated and called as such:
- * NestedIterator i(nestedList);
- * while (i.hasNext()) cout << i.next();
- */
