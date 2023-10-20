@@ -33,22 +33,74 @@
 */
 
 
+// class NestedIterator {
+// public:
+    
+//     stack<NestedInteger> st;
+    
+//     NestedIterator(vector<NestedInteger> &nestedList) {
+//         int n = nestedList.size();
+        
+//         // stack me push kardo sb element firstly.
+//         for(int i =n-1; i>=0; i--){
+//             st.push(nestedList[i]);
+//         }
+//     }
+    
+//     int next() {
+//         int num = st.top().getInteger();
+        
+//         st.pop();
+        
+//         return num;
+        
+//     }
+    
+//     bool hasNext() {
+        
+//         if(st.empty())
+//             return false;
+        
+//         while(!st.empty()){
+//             NestedInteger curr = st.top();
+            
+//             if(curr.isInteger()){
+//                 return true;
+//             }
+            
+            
+//             st.pop();
+            
+//             vector<NestedInteger> vec = curr.getList();
+//             for(int i = vec.size() -1; i>=0; i--){
+//                 st.push(vec[i]);
+//             }
+//         }
+        
+//         return false;
+        
+//     }
+// };
+
+
+// APP
+
 class NestedIterator {
 public:
     
-    stack<NestedInteger> st;
+    stack<NestedInteger*> st;
     
     NestedIterator(vector<NestedInteger> &nestedList) {
         int n = nestedList.size();
         
         // stack me push kardo sb element firstly.
         for(int i =n-1; i>=0; i--){
-            st.push(nestedList[i]);
+            st.push(&nestedList[i]); // obj
         }
     }
     
     int next() {
-        int num = st.top().getInteger();
+        int num = st.top()->getInteger();
         
         st.pop();
         
@@ -62,18 +114,18 @@ public:
             return false;
         
         while(!st.empty()){
-            NestedInteger curr = st.top();
+            NestedInteger* curr = st.top();
             
-            if(curr.isInteger()){
+            if(curr->isInteger()){
                 return true;
             }
             
             
             st.pop();
             
-            vector<NestedInteger> vec = curr.getList();
+            vector<NestedInteger>& vec = curr->getList();
             for(int i = vec.size() -1; i>=0; i--){
-                st.push(vec[i]);
+                st.push(&vec[i]);
             }
         }
         
@@ -81,3 +133,4 @@ public:
         
     }
 };
+
