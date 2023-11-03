@@ -1,7 +1,12 @@
 class Solution {
 public:
     
+    // In worst case, the union finder algorithm runs for O(N)
+    // Where N is the Number of Nodes 
+    
     int * parent;
+    int * rank;
+    
     
     // finding the parent 
     int find(int x){
@@ -17,9 +22,19 @@ public:
         a = find(a);
         b = find(b);
         
-        parent[a] = b;
         
         
+        // make a choice whether a should be the parent of b or vice-versa
+        
+        if(rank[a] > rank[b]){
+            parent[b] = a;
+            rank[a] += rank[b]; // now the element under the group b will come under the group A 
+        }
+        else{
+            parent[a] = b;
+            rank[b] += rank[a];
+            
+        }
     }
     
     vector<int> findRedundantConnection(vector<vector<int>>& e) {
@@ -28,8 +43,12 @@ public:
         
         parent = new int[n+1];
         
+        // initialize the rank
+        
+        rank = new int[n+1];
+        
         for(int i =1; i<=n; i++){
-            parent[i] = i;
+            parent[i] = i, rank[i] = 1;
         }
         
         // traversing our edge list 
