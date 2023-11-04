@@ -1,0 +1,25 @@
+class Solution {
+public:
+    
+    // Most easiest problem once you would consider that the ants passes through each other
+    
+    int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+        
+        int result = 0;
+        
+        // <-------
+        for(int &x : left){
+            result = max(result, x);
+        }
+        
+        
+        // ------->
+        
+        for(int &x: right){
+            result = max(result, n-x);
+        }
+        
+        return result;
+        
+    }
+};
