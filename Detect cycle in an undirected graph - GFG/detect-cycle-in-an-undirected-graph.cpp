@@ -7,33 +7,84 @@ class Solution {
   public:
   
   
-  bool isCycleDFS(vector<int> adj[], int u, vector<bool>& visited, int parent){
+//   bool isCycleDFS(vector<int> adj[], int u, vector<bool>& visited, int parent){
       
-      visited[u] = true;
+//       visited[u] = true;
       
-      for(int &v : adj[u]){
-          if(v == parent) continue;
+//       for(int &v : adj[u]){
+//           if(v == parent) continue;
           
           
           
-          if(visited[v]){
-              return true;
-          }
+//           if(visited[v]){
+//               return true;
+//           }
           
-          if(isCycleDFS(adj, v, visited, u)){
-              return true;
-          }
+//           if(isCycleDFS(adj, v, visited, u)){
+//               return true;
+//           }
           
-      }
-      return false;
-  }
+//       }
+//       return false;
+//   }
     // Function to detect cycle in an undirected graph.
+    // bool isCycle(int V, vector<int> adj[]) {
+        
+    //     vector<bool> visited(V, false);
+        
+    //     for(int i =0; i<V; i++){
+    //         if(!visited[i] && isCycleDFS(adj, i, visited, -1)){
+    //             return true;
+    //         }
+    //     }
+        
+    //     return false;
+    // }
+    
+    
+    bool isCycleBFS(vector<int> adj[], int u, vector<bool>& visited){
+        
+            queue<pair<int,int>> que;
+            
+            // push starting index first
+            que.push({u, -1});
+            
+            visited[u] = true;
+            
+            while(!que.empty()){
+                
+                pair<int, int> P = que.front();
+                que.pop();
+                
+                int source = P.first;
+                int parent = P.second;
+                
+                
+                // iss source se kaha kaha jaa sakte
+                
+                for(int &v: adj[source]){
+                    if(visited[v] == false){
+                        visited[v] = true;
+                        
+                        que.push({v, source});
+                        
+                        
+                    }else if (v != parent){
+                        return true;
+                    }
+                }
+            }
+            
+           return false; 
+        
+    }
+    
     bool isCycle(int V, vector<int> adj[]) {
         
         vector<bool> visited(V, false);
         
         for(int i =0; i<V; i++){
-            if(!visited[i] && isCycleDFS(adj, i, visited, -1)){
+            if(!visited[i] && isCycleBFS(adj, i, visited)){
                 return true;
             }
         }
