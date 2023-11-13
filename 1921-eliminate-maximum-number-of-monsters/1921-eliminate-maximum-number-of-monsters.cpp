@@ -20,14 +20,14 @@ public:
         
         for(int i =1; i<n; i++){
             
-            if(time[i] - time_passed <= 0){
+            if(time[i] - i <= 0){
                 return count;
             }
             
             
             
             count++;
-            time_passed += 1;
+            // time_passed += 1;
         }
         return count;
     }
