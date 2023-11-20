@@ -1,34 +1,51 @@
 class Solution {
 public:
     int garbageCollection(vector<string>& garbage, vector<int>& travel) {
-        int ans=0;
-        travel.insert(travel.begin(),0);
-        for(int i=1;i<travel.size();i++){
-            travel[i]+=travel[i-1];
-        }
-        int p,m,g;
-        p=m=g=0;
-        for(int i=0;i<garbage.size();i++){
-            for(char j:garbage[i]){
-                if(j=='P'){
-                    ans+=(travel[i]-travel[p]);
-                    p=i;
+        
+        int time = 0;
+        
+        int n = garbage.size();
+        
+        
+        int G_idx = 0;
+        int M_idx = 0;
+        int P_idx = 0;
+        
+        
+        vector<int> p_sum(n,0);
+        
+        int prev = 0;
+        
+        
+        
+        
+        
+        for(int i =0; i<n; i++){
+            
+            for(int j=0; j<garbage[i].length(); j++){
+                
+                if(garbage[i][j] == 'M'){
+                    M_idx = i;
+                }else if(garbage[i][j] == 'P'){
+                    P_idx = i;
+                }else{
+                    G_idx = i;
                 }
-                else if(j=='G'){
-                   ans+=(travel[i]-travel[g]);
-                   g=i;
-                }
-                else{
-                   ans+=(travel[i]-travel[m]);
-                   m=i;
-                }
-                ans++;
+                time++;
             }
-
         }
-
-
-        return ans;
+        
+        // make prefix sum
+        for(int i =1; i<travel.size(); i++){
+            travel[i] += travel[i-1];
+        }
+        
+        
+        time += M_idx > 0 ? travel[M_idx -1] : 0;
+        time += P_idx > 0 ? travel[P_idx -1] : 0;
+        time += G_idx > 0 ? travel[G_idx -1] : 0;
+        
+        
+        return time;
     }
-
 };
